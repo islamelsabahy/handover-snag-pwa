@@ -1,0 +1,11 @@
+{
+  "name": "Handover Snag / فحص استلام الوحدة",
+  "short_name": "Snag",
+  "description": "Offline unit handover inspection with photos and a bilingual PDF report",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4efe4",
+  "theme_color": "#ff6a13",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

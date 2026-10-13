@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff6a13">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Handover Snag</title>
+<style>
+:root{--paper:#f4efe4;--card:#fffdf7;--ink:#1b1b1b;--dim:#6d675a;--line:#d8cfba;--orange:#ff6a13;--yellow:#ffd23f;--ok:#1f9d5b;--minor:#d9a400;--major:#ee6a00;--crit:#d62828;
+--sans:"Segoe UI",Tahoma,"Noto Naskh Arabic","Noto Sans Arabic",system-ui,Arial,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--sans);line-height:1.45;background:
+ linear-gradient(135deg,rgba(255,106,19,.08) 25%,transparent 25%) 0 0/22px 22px,var(--paper);min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
+.tape{height:10px;background:repeating-linear-gradient(-45deg,var(--ink) 0 14px,var(--yellow) 14px 28px)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;background:var(--card);border-bottom:2px solid var(--ink);position:sticky;top:0;z-index:5}
+header.top h1{margin:0;font-size:1.05rem;font-weight:900;letter-spacing:.2px}
+header.top h1 span{display:block;font:600 .62rem var(--mono);letter-spacing:.2em;color:var(--orange);text-transform:uppercase}
+main{max-width:760px;margin:0 auto;padding:14px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:2px solid var(--ink);background:var(--card);border-radius:10px;padding:9px 14px;font-weight:700;min-height:44px}
+button.primary{background:var(--orange);color:#fff;border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+button.ghost{border-color:var(--line);font-weight:600}
+button.danger{border-color:var(--crit);color:var(--crit)}
+button:active{transform:translate(1px,1px)}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:12px 14px;margin:0 0 12px;box-shadow:4px 4px 0 rgba(27,27,27,.9)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sp{justify-content:space-between}
+label.f{display:block;margin:8px 0;font-weight:700;font-size:.88rem}
+label.f input,label.f select,label.f textarea{display:block;width:100%;margin-top:4px;padding:10px;border:2px solid var(--line);border-radius:8px;background:#fff;min-height:44px}
+label.f input:focus,label.f select:focus,label.f textarea:focus{outline:3px solid var(--yellow);border-color:var(--ink)}
+.chip{display:inline-block;font:700 .72rem var(--mono);padding:3px 8px;border-radius:999px;border:2px solid var(--ink);background:var(--yellow);direction:ltr}
+.v-ready{background:var(--ok);color:#fff}.v-conditional{background:var(--yellow)}.v-rejected{background:var(--crit);color:#fff}.v-incomplete{background:#fff}
+.bar{height:12px;border:2px solid var(--ink);border-radius:8px;background:#fff;overflow:hidden}
+.bar i{display:block;height:100%;background:repeating-linear-gradient(-45deg,var(--orange) 0 8px,#ff8f4a 8px 16px)}
+.dim{color:var(--dim);font-size:.82rem}
+.room>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:900;padding:4px 0}
+.room>summary::-webkit-details-marker{display:none}
+.item{border-top:1px dashed var(--line);padding:10px 0}
+.item .lbl{font-size:.95rem}
+.item .tr{font:600 .68rem var(--mono);color:var(--dim)}
+.seg{display:flex;gap:6px;margin-top:8px}
+.seg button{flex:1;padding:6px 4px;min-height:42px;font-size:.88rem}
+.seg button.on-ok{background:var(--ok);color:#fff}
+.seg button.on-defect{background:var(--crit);color:#fff}
+.seg button.on-na{background:var(--ink);color:#fff}
+.defect{margin-top:8px;padding:10px;background:#fff3ec;border:2px solid var(--major);border-radius:10px}
+.sev{display:flex;gap:6px;margin:6px 0}
+.sev button{flex:1;min-height:38px;padding:4px;font-size:.84rem}
+.sev button.s-minor.on{background:var(--minor);color:#000}.sev button.s-major.on{background:var(--major);color:#fff}.sev button.s-critical.on{background:var(--crit);color:#fff}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.thumbs .t{position:relative}
+.thumbs img{width:76px;height:76px;object-fit:cover;border-radius:8px;border:2px solid var(--ink);display:block}
+.thumbs .t button{position:absolute;top:-8px;inset-inline-end:-8px;min-height:26px;width:26px;padding:0;border-radius:50%;background:var(--crit);color:#fff;border-color:#fff;font-size:.8rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.stats div{border:2px solid var(--ink);border-radius:10px;padding:6px;text-align:center;background:#fff}
+.stats b{display:block;font:900 1.25rem var(--mono)}
+.stats span{font-size:.7rem;color:var(--dim)}
+.warnbox{border:2px dashed var(--major);background:#fff7e0;border-radius:10px;padding:8px 10px;font-size:.82rem;margin:10px 0}
+.list a{display:block;color:inherit;text-decoration:none}
+.fab{position:fixed;inset-inline-end:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:6}
+.err{color:var(--crit);font-weight:700;margin:6px 0}
+.rep h2{margin:16px 0 6px;font-size:1rem;border-bottom:2px solid var(--ink);padding-bottom:3px}
+.rep table{width:100%;border-collapse:collapse;font-size:.88rem}
+.rep th,.rep td{border:1px solid var(--line);padding:6px;text-align:start;vertical-align:top}
+.rep .tw{overflow-x:auto}.rep table{min-width:560px}.rep td:first-child{white-space:nowrap}
+.rep .ph{display:flex;gap:6px;flex-wrap:wrap}.rep .ph img{width:92px;height:92px;object-fit:cover;border:1px solid var(--ink);border-radius:4px}
+bdi{unicode-bidi:isolate}
+.printonly{display:none}
+@media print{
+ body{background:#fff}.tape,header.top,.fab,.noprint,button{display:none!important}
+ .printonly{display:block}.card{box-shadow:none;border:1px solid #888;break-inside:avoid}
+ main{max-width:none;padding:0}.rep tr{break-inside:avoid}.rep .tw{overflow:visible}.rep table{min-width:0}
+}
+</style>
+</head>
+<body>
+<div class="tape"></div>
+<header class="top">
+  <h1><span id="kick"></span><span id="ttl" style="font:inherit;color:inherit;letter-spacing:0;text-transform:none"></span></h1>
+  <div class="row"><button class="ghost" id="home" aria-label="home">⌂</button><button class="ghost" id="lang">EN</button></div>
+</header>
+<main id="app"></main>
+<script src="templates.js"></script>
+<script src="snag.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
